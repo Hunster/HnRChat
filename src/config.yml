@@ -1,0 +1,4 @@
+#Self Explanatory | Case Sensitive
+globalChatFormat: "%rank% %name% %level% %message%"
+globalTabFormat: "%rank% %name% %level%"
+globalHeadFormat: "%rank% %level%"

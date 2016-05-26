@@ -1,8 +1,9 @@
-main: com.weebly.openboxtechnologies.hnrchat.Main
+main: com.weebly.openboxtechnologies.hnrchat.hnrchat
 name: HnRChat
 version: 0.1
 author: TechnoBrony
 description: HnRChat Plugin for the HnR Server
+softdepend: [HnRLevels, HnRPerms]
 commands:
    hnrchat:
       description: This is the HnR Chat main command.

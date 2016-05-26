@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BukkitTemplate.iml" filepath="$PROJECT_DIR$/BukkitTemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HnRChat.iml" filepath="$PROJECT_DIR$/HnRChat.iml" />
     </modules>
   </component>
 </project>

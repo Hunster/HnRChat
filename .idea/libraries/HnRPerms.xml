@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="HnRPerms">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../HnRPerms/out/artifacts/HnRPerms_jar/HnRPerms.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

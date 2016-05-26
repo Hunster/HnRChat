@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="HnRLevels">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../HnRLevels/out/artifacts/HnRLevels_jar/HnRLevels.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
