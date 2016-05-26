@@ -5,14 +5,10 @@ import com.weebly.openboxtechnologies.hnrperms.hnrperms;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.defaults.ScoreboardCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
 
 import java.io.File;
-import java.util.Set;
 
 public class hnrchat extends JavaPlugin {
 
@@ -48,16 +44,18 @@ public class hnrchat extends JavaPlugin {
         }
 
         if (!e.hasPermission("chat.admin")) {
-            ChatColor.translateAlternateColorCodes('&', "&e&lHnRPerms&7&l> &9To use this feature, you must be rank &8(&cADMIN&8)&9!");
+            e.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&lHnRPerms&7&l> &9To use this feature, you must be rank &8(&cADMIN&8)&9!"));
+            return true;
         }
 
         if (args.length == 0) {
-            e.sendMessage("&e&HnRChat&7&l> &9This is the HnR Chat main command!");
+            e.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&lHnRChat&7&l> &9This is the HnR Chat main command!"));
             return true;
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("reload")) {
                 loadConfig();
-                e.sendMessage("&e&HnRChat&7&l> &9The config file has been reloaded!");
+                e.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&lHnRChat&7&l> &9The config file has been reloaded!"));
+                return true;
             }
         }
         return true;
@@ -84,5 +82,6 @@ public class hnrchat extends JavaPlugin {
         chatFormat = getConfig().getString("globalChatFormat");
         tabFormat = getConfig().getString("globalTabFormat");
         headFormat = getConfig().getString("globalHeadFormat");
+        headFormat = headFormat.replace('&', '§');
     }
 }

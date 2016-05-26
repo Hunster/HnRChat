@@ -1,4 +1,5 @@
 #Self Explanatory | Case Sensitive
-globalChatFormat: "%rank% %name% %level% %message%"
-globalTabFormat: "%rank% %name% %level%"
-globalHeadFormat: "%rank% %level%"
+globalChatFormat: "%rank% %name% %level% &9>> %message%"
+globalTabFormat: "%rank% &4%name% %level%"
+#The scoreboard has a maximum prefix of 16 characters including colors
+globalHeadFormat: "%rank% &2%level%"
