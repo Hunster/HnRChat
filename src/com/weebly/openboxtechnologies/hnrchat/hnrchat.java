@@ -6,9 +6,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class hnrchat extends JavaPlugin {
 
@@ -16,8 +19,8 @@ public class hnrchat extends JavaPlugin {
     static hnrperms perms;
 
     static String chatFormat;
-    static String tabFormat;
-    static String headFormat;
+    static HashMap<String, String> rankTabMap = new HashMap<>();
+    static HashMap<String, String> rankHeadMap = new HashMap<>();
 
     static Scoreboard scoreboard;
 
@@ -28,8 +31,14 @@ public class hnrchat extends JavaPlugin {
         levels = (hnrlevels) getServer().getPluginManager().getPlugin("HnRLevels");
         perms = (hnrperms) getServer().getPluginManager().getPlugin("HnRPerms");
 
-        loadConfig();
+        if (levels == null | perms == null) {
+            getLogger().severe("A dependency could not be loaded! Please check your other plugins.");
+            getLogger().severe("Disabling HnRChat ...");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+
         scoreboard = getServer().getScoreboardManager().getMainScoreboard();
+        loadConfig();
     }
 
     @Override
@@ -72,6 +81,19 @@ public class hnrchat extends JavaPlugin {
             if (!file.exists()) {
                 getLogger().info("Config.yml not found, creating!");
                 saveDefaultConfig();
+                int amountOfLevels = levels.getAmountOfLevels();
+                for (int i = 0; i < amountOfLevels; i++) {
+                    getConfig().set("levels." + i, "&5");
+                }
+
+                ArrayList<String> ranks = new ArrayList<>();
+                ranks.addAll(perms.getRanksList());
+
+                for (String i : ranks) {
+                    getConfig().set("ranks." + i + ".tab", "%rank% &4%name% &5%level%");
+                    getConfig().set("ranks." + i + ".head", "%rank% &5%level%");
+                }
+                getConfig().save(file);
             } else {
                 getLogger().info("Config.yml found, loading!");
             }
@@ -79,9 +101,21 @@ public class hnrchat extends JavaPlugin {
             e.printStackTrace();
 
         }
+
         chatFormat = getConfig().getString("globalChatFormat");
-        tabFormat = getConfig().getString("globalTabFormat");
-        headFormat = getConfig().getString("globalHeadFormat");
-        headFormat = headFormat.replace('&', '§');
+
+        ArrayList<String> ranks = new ArrayList<>();
+        ranks.addAll(perms.getRanksList());
+
+        for (String i : ranks) {
+            String tabTemp = getConfig().getString("ranks." + i + ".tab");
+            tabTemp = tabTemp.replace("%rank%", i);
+            tabTemp = ChatColor.translateAlternateColorCodes('&', tabTemp);
+            rankTabMap.put(i, tabTemp);
+            String headTemp = getConfig().getString("ranks." + i + ".head");
+            headTemp = headTemp.replace("%rank%", i);
+            headTemp = headTemp.replace('&', '§');
+            rankHeadMap.put(i, headTemp);
+        }
     }
 }

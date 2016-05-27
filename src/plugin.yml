@@ -3,7 +3,7 @@ name: HnRChat
 version: 0.1
 author: TechnoBrony
 description: HnRChat Plugin for the HnR Server
-softdepend: [HnRLevels, HnRPerms]
+depend: [HnRLevels, HnRPerms]
 commands:
    hnrchat:
       description: This is the HnR Chat main command.
